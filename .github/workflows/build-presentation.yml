@@ -62,7 +62,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           personal_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: presentation/dist
+          publish_dir: presentation/
           user_name: ${{ github.actor }}
           user_email: ${{ github.actor }}@users.noreply.github.com
           commit_message: "Deploy presentation"
