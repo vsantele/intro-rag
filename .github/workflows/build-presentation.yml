@@ -33,7 +33,7 @@ jobs:
         run: pnpm exec playwright install-deps
         working-directory: ./presentation
       - name: Build presentation
-        run: pnpm build --base intro-rag
+        run: pnpm build --base /intro-rag
         working-directory: ./presentation
       - name: Archive presentation
         uses: actions/upload-artifact@v2
