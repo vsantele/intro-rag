@@ -8,6 +8,13 @@ on:
       - "presentation/**"
   workflow_dispatch:
 
+env:
+  BUILD_PATH: "presentation"
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
 jobs:
   build:
     name: Build Presentation
@@ -18,7 +25,7 @@ jobs:
       group: ${{ github.workflow }}-${{ github.ref }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - uses: pnpm/action-setup@v3
         with:
           version: 8
@@ -26,36 +33,41 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 20
+          cache: "pnpm"
+          cache-dependency-path: ${{ env.BUILD_PATH }}/pnpm-lock.yaml
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v4
       - name: Install dependencies
         run: pnpm install
-        working-directory: ./presentation
+        working-directory: ${{ env.BUILD_PATH }}
       - name: Install deps for pdf generation
         run: pnpm exec playwright install-deps
-        working-directory: ./presentation
+        working-directory: ${{ env.BUILD_PATH }}
       - name: Build presentation
-        run: pnpm build --base /intro-rag
-        working-directory: ./presentation
-      - name: Archive presentation
-        uses: actions/upload-artifact@v2
-        with:
-          name: github-pages
-          path: presentation/dist
+        run: pnpm build --base "${{ steps.pages.outputs.base_path }}"
+        working-directory: ${{ env.BUILD_PATH }}
       - name: Publish presentation pdf
         uses: actions/upload-artifact@v2
         with:
           name: presentation-pdf
           path: presentation/dist/slidev-exported.pdf
-  publishGithubPages:
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ env.BUILD_PATH }}/dist
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     needs: build
-    name: Publish to GitHub Pages
+    name: Deploy
     runs-on: ubuntu-latest
     permissions:
       contents: write
       pages: write
       id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
