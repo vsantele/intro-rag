@@ -38,7 +38,7 @@ jobs:
       - name: Archive presentation
         uses: actions/upload-artifact@v2
         with:
-          name: presentation
+          name: github-pages
           path: presentation/dist
       - name: Publish presentation pdf
         uses: actions/upload-artifact@v2
@@ -52,17 +52,11 @@ jobs:
     permissions:
       contents: write
       pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Download presentation
-        uses: actions/download-artifact@v2
-        with:
-          name: presentation
-          path: presentation
-      - name: Publish to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          personal_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: presentation/
-          user_name: ${{ github.actor }}
-          user_email: ${{ github.actor }}@users.noreply.github.com
-          commit_message: "Deploy presentation"
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
