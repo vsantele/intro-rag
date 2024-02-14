@@ -1,0 +1,68 @@
+name: Build and Publish Presentation
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "presentation/**"
+  workflow_call:
+
+jobs:
+  build:
+    name: Build Presentation
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 8
+      - name: Use Node.js 20
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - name: Install dependencies
+        run: pnpm install
+        working-directory: ./presentation
+      - name: Install deps for pdf generation
+        run: pnpm exec playwright install-deps
+        working-directory: ./presentation
+      - name: Build presentation
+        run: pnpm build
+        working-directory: ./presentation
+      - name: Archive presentation
+        uses: actions/upload-artifact@v2
+        with:
+          name: presentation
+          path: presentation/dist
+      - name: Publish presentation pdf
+        uses: actions/upload-artifact@v2
+        with:
+          name: presentation-pdf
+          path: presentation/dist/slidev-exported.pdf
+  publishGithubPages:
+    needs: build
+    name: Publish to GitHub Pages
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+    steps:
+      - name: Download presentation
+        uses: actions/download-artifact@v2
+        with:
+          name: presentation
+          path: presentation
+      - name: Publish to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          personal_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: presentation/dist
+          user_name: ${{ github.actor }}
+          user_email: ${{ github.actor }}@users.noreply.github.com
+          commit_message: "Deploy presentation"
