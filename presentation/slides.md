@@ -10,7 +10,7 @@ info: |
 drawings:
   persist: false
 layout: cover
-transition: slide-left
+transition: fade
 title: Découverte du RAG
 mdc: true
 download: true
@@ -20,13 +20,6 @@ download: true
 
 Retrieval Augmented Generation
 
----
-layout: default
----
-
-# Sommaire
-
-<Toc maxDepth="1"></Toc>
 
 ---
 
@@ -126,6 +119,10 @@ Documentation: <https://platform.openai.com/docs/guides/embeddings/use-cases>
 
 
 Documentation: [https://learn.microsoft.com/en-us/azure/cosmos-db/vector-database](https://learn.microsoft.com/en-us/azure/cosmos-db/vector-database?wt.mc_id=studentamb_236461)
+
+Liste non exhaustive: <https://python.langchain.com/docs/integrations/vectorstores/>
+
+<!-- demo faiss -->
 
 ---
 
@@ -267,12 +264,20 @@ for query, doc_scores in search_results_dict.items():
 
 <!--
 1: all
+
 2: search_results_dict
+
 3: fused_scores
+
 4: for query
+
 5: for rank
+
 6: doc_scores sorted
+
 7: calcul
+
+Fin démo
 -->
 ---
 
@@ -303,6 +308,27 @@ Autre exemple:
 - Recherche dans des textes de lois
 - Références à d'autres articles
 - Combinaison de plusieurs sources pour une réponse
+
+---
+
+
+
+<img src="/schemaRag.gif" class=" mx-auto h-120" />
+---
+
+# Outils
+
+- [promptflow](https://learn.microsoft.com/en-us/azure/machine-learning/prompt-flow/get-started-prompt-flow?view=azureml-api-2&wt.mc_id=studentamb_236461): python, (C# comming soon)
+- [semantic kernal](https://learn.microsoft.com/en-us/semantic-kernel/overview?wt.mc_id=studentamb_236461): C#, Python, Java
+- [langchain](https://www.langchain.com/): JS, Python, Java
+
+---
+
+# Evaluation
+
+- Evaluer la pertinence de la réponse
+- Evaluer la pertinence des documents retrouvés
+- Evaluer la pertinence de la requête modifiée
 
 ---
 
@@ -340,6 +366,7 @@ Autre exemple:
 - <https://www.linkedin.com/pulse/retrieval-augmented-generation-rag-next-frontier-covarrubias/>
 - <https://medium.com/@shivansh.kaushik/this-technique-will-make-your-llm-smarter-and-more-context-aware-rag-on-steroids-b16d7cf4a42c>
 - <https://medium.com/@shivansh.kaushik/talk-to-your-database-using-rag-and-llms-42eb852d2a3c>
+- <https://www.langchain.com/use-case/retrieval>
 
 ## Culture générale
 
