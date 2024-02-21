@@ -41,11 +41,10 @@ jobs:
       - name: Install dependencies
         run: pnpm install
         working-directory: ${{ env.BUILD_PATH }}
-      - name: Install deps for pdf generation
-        run: pnpm exec playwright install-deps
-        working-directory: ${{ env.BUILD_PATH }}
       - name: Build presentation
-        run: pnpm build --base "${{ steps.pages.outputs.base_path }}"
+        run: |
+          pnpm exec playwright install-deps
+          pnpm build --base "${{ steps.pages.outputs.base_path }}"
         working-directory: ${{ env.BUILD_PATH }}
       - name: Publish presentation pdf
         uses: actions/upload-artifact@v2
