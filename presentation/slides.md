@@ -79,13 +79,6 @@ LinkedIn: [Victor Santelé](https://www.linkedin.com/in/victor-santele/)
 - Embedding des requêtes
 - Recherche des plus proches voisins
 - Utilisation des plus proches voisins pour améliorer la génération
-
----
-
-<div class="w-full h-full">
-  <img src="/ragSimple.png" class="mx-auto my-auto"/>
-</div>
-
 ---
 
 # Embedding
@@ -144,6 +137,12 @@ Liste des features: [https://learn.microsoft.com/en-us/azure/search/search-featu
 
 ---
 layout: section
+---
+
+<div class="w-full h-full">
+  <img src="/ragSimple.png" class="mx-auto my-auto"/>
+</div>
+
 ---
 
 # Retrieval
