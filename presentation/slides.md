@@ -79,6 +79,7 @@ LinkedIn: [Victor Santelé](https://www.linkedin.com/in/victor-santele/)
 - Embedding des requêtes
 - Recherche des plus proches voisins
 - Utilisation des plus proches voisins pour améliorer la génération
+
 ---
 
 # Embedding
@@ -136,13 +137,13 @@ Liste non exhaustive: <https://python.langchain.com/docs/integrations/vectorstor
 Liste des features: [https://learn.microsoft.com/en-us/azure/search/search-features-list](https://learn.microsoft.com/en-us/azure/search/search-features-list?wt.mc_id=studentamb_236461)
 
 ---
-layout: section
----
 
 <div class="w-full h-full">
   <img src="/ragSimple.png" class="mx-auto my-auto"/>
 </div>
 
+---
+layout: section
 ---
 
 # Retrieval
@@ -283,7 +284,7 @@ Fin démo
 ## Méthode avancée 2:  Multi-Hop Reasoning System 
 
 <div v-click class="italic">
-j'y ai pensé avant de voir que  ça existait...
+j'y ai pensé avant de voir que ça existait...
 </div>
 <br>
 - Décomposer la question en plusieurs sous-questions qui se suivent/ sont complémentaires.
@@ -302,7 +303,7 @@ Exemple:
 
 ---
 
-Autre exemple:
+Autres exemples:
 
 - Recherche dans des textes de lois
 - Références à d'autres articles
@@ -331,7 +332,7 @@ Autre exemple:
 
 ---
 
-### Piste de recherche
+### Pistes de recherche
 
 - Entity Extraction
 - Question Decomposition
@@ -339,7 +340,7 @@ Autre exemple:
 
 ---
 
-# Conclusions
+# Conclusion
 
 ## Warning
 
