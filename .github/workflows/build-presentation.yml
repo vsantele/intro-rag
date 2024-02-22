@@ -30,7 +30,7 @@ jobs:
         with:
           version: 8
       - name: Use Node.js 20
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: "pnpm"
@@ -41,10 +41,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install
         working-directory: ${{ env.BUILD_PATH }}
+      - name: Install playwright dependencies
+        run: pnpm exec playwright install --with-deps
+        working-directory: ${{ env.BUILD_PATH }}
       - name: Build presentation
-        run: |
-          pnpm exec playwright install-deps
-          pnpm build --base "${{ steps.pages.outputs.base_path }}"
+        run: pnpm build --base "${{ steps.pages.outputs.base_path }}"
         working-directory: ${{ env.BUILD_PATH }}
       - name: Publish presentation pdf
         uses: actions/upload-artifact@v2
